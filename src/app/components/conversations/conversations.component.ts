@@ -51,6 +51,7 @@ export class ConversationComponent implements OnInit {
     });
 
     this.socket.chatList.subscribe(chatList => {
+
       this.chatList = chatList as any;
       this.chatListHeads = chatList.map((x: any) => x[0]);
 
@@ -62,10 +63,10 @@ export class ConversationComponent implements OnInit {
 
       this.chat = chatList[chatList.findIndex((x: any) => x[0].chatmate_id === this.chatmateId)];
 
-      if(!this.untouched)
-        return;
+      //if(!this.untouched)
+      //  return;
       
-      this.api.seenChat(this.chatmateId).subscribe();
+      //this.api.seenChat(this.chatmateId).subscribe();
     });
   }
 

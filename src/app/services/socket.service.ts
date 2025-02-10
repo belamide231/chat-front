@@ -51,22 +51,17 @@ export class SocketService {
 
       const index = this._chatList.value.findIndex(x => x[0].chatmate_id === object.chatmate_id);
       const prev = this._chatList.value[index];
-      
-      console.log(prev);
 
+      console.log(this._chatList.value);
+      
       prev.map((x: any, i: number) => {
-        if(x.sender_id === object.chatmate_id && x.sent_at <= object.timestamp && x.content_status === 'delivered') {
+        if(x.sender_id !== object.chatmate_id && new Date(x.sent_at) <= new Date(object.timestamp) && x.content_status === 'delivered') 
           x.content_status = 'seen';
-        }
 
         return x;
       });
 
-      //setTimeout(() => {
-      //  console.log(prev);
-      //}, 1000);
-
-      //this._chatList.next(prev);
+      this._chatList.value[index] = prev;
     });
   }
 
